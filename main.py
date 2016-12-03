@@ -13,6 +13,16 @@ if __name__ == "__main__":
     generator.createInstanceToFile(fileName, processorsNumber, processCount, maxLength)
 
     #Read instance from file
+
+
+    # latwiejsze wczytywanie z obcego pliku
+
+
+    file = open(fileName, 'r')
+    processorsNumber = int (file.readline())
+    processCount = int (file.readline())
+    file.close()
+
     procLength = generator.readInstanceFromFile(fileName, processCount)
     optimumResult = sum(procLength) // processorsNumber
 
@@ -20,5 +30,8 @@ if __name__ == "__main__":
     greedyResult = greedy.greedy(processorsNumber, processCount, procLength)
 
     #Compare results.
-    print(optimumResult)
+
+    print ("\noptimum result")
+    print(optimumResult )
+    print ("\ngreedy result")
     print(greedyResult)
