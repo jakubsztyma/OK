@@ -17,7 +17,7 @@ if __name__ == "__main__":
     optimumResult = sum(procLength) // processorsNumber
 
     #Execute greedy algorithm.
-    greedyResult = greedy.greedy()
+    greedyResult = greedy.greedy(processorsNumber, processCount, procLength)
 
     #Compare results.
     print(optimumResult)
