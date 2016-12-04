@@ -1,6 +1,8 @@
 from random import randint
+MINIMAL_PROCESS_LENGTH = 30
 
 #Function does not guarantee th proper number of processes and optimum.
+#Minimal time of process is 10
 def createInstanceToFile(fileName, processorsNumber, processCount, maxLength):
     width = (processorsNumber * maxLength) // 4
 
@@ -9,11 +11,6 @@ def createInstanceToFile(fileName, processorsNumber, processCount, maxLength):
     #Reduce the number of processes to fit thee processCount variable
     reduce(processes, maxLength, processCount)
 
-    """ test
-    for i in range(len(processes)):
-        print(len(processes[i]),sum(processes[i]), width)
-    print(sum([len(row) for row in processes]))
-    """
     #Write to file
     procLength = []
     for row in processes:
@@ -52,11 +49,11 @@ def generate(fileName, processorsNumber, processCount, maxLength, width):
         usedLength = 0
 
         #Create for this processor.
-        new = randint(1, maxLength//2)
+        new = randint(MINIMAL_PROCESS_LENGTH, maxLength//2)
         while usedLength + new <= width:
             proc.append(new)
             usedLength += new
-            new = randint(1, maxLength//2)
+            new = randint(MINIMAL_PROCESS_LENGTH, maxLength//2)
         #Append the rest of free space
         if width - usedLength > 0:
             proc.append(width - usedLength)
