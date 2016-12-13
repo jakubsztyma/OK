@@ -4,7 +4,9 @@ def greedy(processorsNumber, processCount, procLength ):
 
 
 
-
+    myArray=[]
+    for  i in range (processorsNumber):
+        myArray.append([])
 
 #sortowanie malejaco czasow procesow
     procLength.sort()
@@ -15,7 +17,9 @@ def greedy(processorsNumber, processCount, procLength ):
 
     # Tworzenie "tablicy procesorow"
     for i in range (processorsNumber):
-        proc_array.append(procLength.pop(0))
+        temp = procLength.pop(0)
+        myArray[i].append(temp)
+        proc_array.append(temp)
         processCount-=1
 
 
@@ -25,7 +29,9 @@ def greedy(processorsNumber, processCount, procLength ):
         for i in range (processorsNumber):
             proc_array[i] -=1
             if proc_array[i]== 0 :
-                proc_array[i] = procLength.pop(0)
+                temp = procLength.pop(0)
+                myArray[i].append(temp)
+                proc_array[i] = (temp)
                 processCount-=1
             if processCount== 0:
                 break
@@ -41,4 +47,5 @@ def greedy(processorsNumber, processCount, procLength ):
 
     timer += max
 
-    return timer
+
+    return myArray;
