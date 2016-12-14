@@ -1,63 +1,67 @@
 import time
 
-def genetic( array_of_processors, end_time):
+def genetic(array_of_processors, end_time):
+    length = len(array_of_processors)
+    start_time = time.clock()
 
+    while True:
+        #Podejmujemy próbę krzyżowania.
+        for index in range(0, length-1):
+            #Sortujemy procesory po sumie czasow.
+            array_of_processors = sorted(array_of_processors, key=sum)
 
-     #start = time.clock()
-    #sortowanie wzgledem czasu wykonywanie na danym procesorze malejaco
+            mniejszy = array_of_processors[index]
+            wiekszy = array_of_processors[length-1]
 
-    for i in range (200):
-        for i in range (len(array_of_processors)):
+            #print(sum(mniejszy), sum(wiekszy))  #Test. Do wykasowania
 
-            array_of_processors[i].insert(0,sum(array_of_processors[i]))
+            #Kończymy próbę krzyżowania, jeśli udało się krzyżowanie dowonych dwóch osobników.
+            #Ważne! Pominięcie tego kroku może skutkować pogorszeniem wyniku.
+            sukces = balance(mniejszy, wiekszy)
+            if sukces:
+                break
 
-        array_of_processors.sort()
-        array_of_processors.reverse()
-        for i in range(len(array_of_processors)):
-            array_of_processors[i].pop(0)
-
-        X1 = array_of_processors[0]
-        length = len(array_of_processors)
-        X2=  array_of_processors[length-1]
-
-        X = []
-        X = balance(X1, X2)
+        #Wyjdź z funkcji jeśli przekroczono limit czasu
+        if time.clock() - start_time > end_time:
+            print(time.clock() - start_time)
+            return array_of_processors
 
     return array_of_processors
 
 
 
-def balance (X1, X2):
-
-    diff = int((sum(X1) - (sum(X2)))/2)
-    abs_diff =100
+def balance (mniejszy, wiekszy):
+    difference = sum(mniejszy) - sum(wiekszy)
+    #Jeśli różnica czasu pomiędzy procesami jest równa 0, nie naeży nic zminiać
+    if(difference == 0):
+        return False
+    #Różnica czasu wykonań(podzielona przez 2)
+    diff = int(difference/2)
+    #Minimalna różnica możliwa do uzyskania po poprawieniu
+    abs_diff =10000
 
     # zauwazylem ze elementy o tych samych indeksach czesto maja dosc ciekawe roznice pomiedzy wartosciami i ta petla porownuje je poszukujac
     #najblizszej optimum pary do zamiany, jest tak przez to ze my je sortujemy w greedym
 
     to_change =0
-    for i in range(min(len(X1), len(X2))):
-        if ((abs ((X1[i]-X2[i]) - diff ))< abs_diff):
+    for i in range(min(len(mniejszy), len(wiekszy))):
+        if abs(mniejszy[i]-wiekszy[i] - diff)< abs_diff:
             to_change = i
-            abs_diff =(abs ((X1[i]-X2[i]) - diff ))
+            abs_diff = abs((mniejszy[i] - wiekszy[i]) - diff)
 
+    #Zracamy fałsz, jeśli nie uda się poprawić osobnika.
+    if abs(diff) <= abs(abs_diff):
+        return False
 
+    #Krzyżujemu osobniki jeśli poprawi to wynik
+    temp1 = mniejszy[to_change]
+    temp2 = wiekszy[to_change]
 
-    temp1= X1[to_change]
-    temp2 = X2[to_change]
+    mniejszy[to_change] = temp2
+    wiekszy[to_change] = temp1
 
-    X1.remove(temp1)
-    X2.remove(temp2)
-    X1.append(temp2)
-    X2.append(temp1)
-    X2.sort()
-    X2.reverse()
-    X1.sort()
-    X1.reverse()
-    X = []
-    X.append(X1)
-    X.append(X2)
-    return X
+    #Zwracamy true jeśli udało się poprawić osobnika
+    return True
 
 
 
