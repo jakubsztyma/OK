@@ -9,9 +9,9 @@ if __name__ == "__main__":
 
     fileName = "instance"
 
-    #read_name = "m50n1000.txt"
+    read_name = "m50n1000.txt"
     #read_name = "instance"
-    read_name = "testKolejnosc.txt"
+    #read_name = "testKolejnosc.txt"
 
 
     #Create instance and write to file.
