@@ -5,7 +5,7 @@ def genetic(array_of_processors, end_time):
     start_time = time.clock()
 
     while True:
-        #Podejmujemy próbę krzyżowania.
+        #Podejmujemy prb krzyowania.
         for index in range(0, length-1):
             #Sortujemy procesory po sumie czasow.
             array_of_processors = sorted(array_of_processors, key=sum)
@@ -15,13 +15,13 @@ def genetic(array_of_processors, end_time):
 
             #print(sum(mniejszy), sum(wiekszy))  #Test. Do wykasowania
 
-            #Kończymy próbę krzyżowania, jeśli udało się krzyżowanie dowonych dwóch osobników.
-            #Ważne! Pominięcie tego kroku może skutkować pogorszeniem wyniku.
+            #Koczymy pr krzyowania, jeli udao si krzyowanie dowonych dwch osobnikw.
+            #Wane! Pominicie tego kroku mo skutkowa pogorszeniem wyniku.
             sukces = krzyzowanieWszystkieIndeksy(mniejszy, wiekszy)
             if sukces:
                 break
 
-        #Wyjdź z funkcji jeśli przekroczono limit czasu
+        #Wyj z funkcji jli przekroczono limit czasu
         if time.clock() - start_time > end_time:
             print(time.clock() - start_time)
             return array_of_processors
@@ -29,15 +29,15 @@ def genetic(array_of_processors, end_time):
     return array_of_processors
 
 
-#Poniżej różne wersje funkcji do krzyżowania.
+#Ponij ne wersje funkcji do krzyowania.
 def balance (mniejszy, wiekszy):
     difference = sum(mniejszy) - sum(wiekszy)
-    #Jeśli różnica czasu pomiędzy procesami jest równa 0, nie naeży nic zminiać
+    #Jeli rnica czasu pomidzy procesami jest rwna 0, nie naey nic zminia
     if(difference == 0):
         return False
-    #Różnica czasu wykonań(podzielona przez 2)
+    #Rnica czasu wykona(podzielona przez 2)
     diff = int(difference/2)
-    #Minimalna różnica możliwa do uzyskania po poprawieniu
+    #Minimalna rica mliwa do uzyskania po poprawieniu
     abs_diff =10000
 
     # zauwazylem ze elementy o tych samych indeksach czesto maja dosc ciekawe roznice pomiedzy wartosciami i ta petla porownuje je poszukujac
@@ -49,28 +49,28 @@ def balance (mniejszy, wiekszy):
             to_change = i
             abs_diff = abs((mniejszy[i] - wiekszy[i]) - diff)
 
-    #Zracamy fałsz, jeśli nie uda się poprawić osobnika.
+    #Zracamy faz, jei nie uda si poprawi osobnika.
     if abs(diff) <= abs(abs_diff):
         return False
 
-    #Krzyżujemu osobniki jeśli poprawi to wynik
+    #Krzyujemu osobniki jeli poprawi to wynik
     temp1 = mniejszy[to_change]
     temp2 = wiekszy[to_change]
 
     mniejszy[to_change] = temp2
     wiekszy[to_change] = temp1
 
-    #Zwracamy true jeśli udało się poprawić osobnika
+    #Zwracamy true jeli udao s poprawi osobnika
     return True
 
 def krzyzowanieWszystkieIndeksy(mniejszy, wiekszy):
     difference = sum(mniejszy) - sum(wiekszy)
-    #Jeśli różnica czasu pomiędzy procesami jest równa 0, nie naeży nic zminiać
+    #Jeli rnica czasu pomidzy procesami jest rowna 0, nie naezy nic zminia
     if(difference == 0):
         return False
-    #Różnica czasu wykonań(podzielona przez 2)
+    #Roznica czasu wykonan(podzielona przez 2)
     diff = int(difference/2)
-    #Minimalna różnica możliwa do uzyskania po poprawieniu
+    #Minimalna roznica mozliwa do uzyskania po poprawieniu
     abs_diff =10000
 
     # zauwazylem ze elementy o tych samych indeksach czesto maja dosc ciekawe roznice pomiedzy wartosciami i ta petla porownuje je poszukujac
@@ -83,16 +83,16 @@ def krzyzowanieWszystkieIndeksy(mniejszy, wiekszy):
                 to_change = {'mniejszy':i, 'wiekszy':j}
                 abs_diff = abs((mniejszy[i] - wiekszy[j]) - diff)
 
-    #Zracamy fałsz, jeśli nie uda się poprawić osobnika.
+    #Zracamy fazsz, jeli nie uda si poprawi osobnika.
     if abs(diff) <= abs(abs_diff):
         return False
 
-    #Krzyżujemu osobniki jeśli poprawi to wynik
+    #Krzyzujemu osobniki jeli poprawi to wynik
     temp1 = mniejszy[to_change['mniejszy']]
     temp2 = wiekszy[to_change['wiekszy']]
 
     mniejszy[to_change['mniejszy']] = temp2
     wiekszy[to_change['wiekszy']] = temp1
 
-    #Zwracamy true jeśli udało się poprawić osobnika
+    #Zwracamy true jeli udazo  poprawi osobnika
     return True

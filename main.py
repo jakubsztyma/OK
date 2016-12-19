@@ -9,7 +9,7 @@ if __name__ == "__main__":
 
     fileName = "instance"
 
-    read_name = "m50n1000.txt"
+    read_name = "m25.txt"
     #read_name = "instance"
     #read_name = "testKolejnosc.txt"
 
@@ -54,16 +54,14 @@ if __name__ == "__main__":
     # execute genetic algorithm
     array_after_genetic = []
     sum_array= []
-    array_after_genetic = genetic.genetic(array_of_processors, 10)  #Drugi parametr to ilość sekund.
+    array_after_genetic = genetic.genetic(array_of_processors, 30)  #Drugi parametr to ilo sekund.
     for i in range(processorsNumber):
         sum_array.append(sum(array_after_genetic[i]))
     print( "wynik po genetycznym")
     print (max(sum_array))
 
     #DO usuniecia
-    print(array_after_genetic[0], sum(array_after_genetic[0]))
-    print(array_after_genetic[1], sum(array_after_genetic[1]))
-    print(array_after_genetic[2], sum(array_after_genetic[2]))
 
-
+    for k in array_after_genetic:
+        print (k, sum(k))
 
