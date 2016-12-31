@@ -1,3 +1,5 @@
+#Grupa 1.1
+
 import generator, greedy, genetic
 import math
 
@@ -17,6 +19,10 @@ if __name__ == "__main__":
     #read_name = "instancje/m50n1000.txt"
     #read_name = "instancje/instance"
     #read_name = "instancje/testKolejnosc.txt"
+<<<<<<< HEAD
+=======
+    read_name = "instancje/m25.txt"
+>>>>>>> cd61ee90b019bf5b38aef51a6b47dc9906318a6d
     #read_name = "instancje/2_1000_25_3.txt"
 
 
@@ -60,13 +66,24 @@ if __name__ == "__main__":
     # execute genetic algorithm
     array_after_genetic = []
     sum_array= []
+<<<<<<< HEAD
     array_after_genetic = genetic.genetic(array_of_processors, 3, optimumResult)  #Drugi parametr to ilo sekund.
+=======
+    array_after_genetic = genetic.genetic(array_of_processors, 2)  #Drugi parametr to ilość sekund.
+
+>>>>>>> cd61ee90b019bf5b38aef51a6b47dc9906318a6d
     for i in range(processorsNumber):
         sum_array.append(sum(array_after_genetic[i]))
     print( "wynik po genetycznym")
     print (max(sum_array))
 
+<<<<<<< HEAD
     #DO usuniecia
+=======
+    for i in range(len(array_after_genetic)):
+        print(sorted(array_after_genetic[i], reverse=True), sum(array_after_genetic[i]))
+
+>>>>>>> cd61ee90b019bf5b38aef51a6b47dc9906318a6d
 
     #for k in array_after_genetic:
     #    print (k, sum(k))
