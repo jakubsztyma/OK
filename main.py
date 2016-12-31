@@ -9,9 +9,15 @@ if __name__ == "__main__":
 
     fileName = "instance"
 
+
     read_name = "m25.txt"
     #read_name = "instance"
     #read_name = "testKolejnosc.txt"
+
+    #read_name = "instancje/m50n1000.txt"
+    #read_name = "instancje/instance"
+    #read_name = "instancje/testKolejnosc.txt"
+    #read_name = "instancje/2_1000_25_3.txt"
 
 
     #Create instance and write to file.
@@ -54,7 +60,7 @@ if __name__ == "__main__":
     # execute genetic algorithm
     array_after_genetic = []
     sum_array= []
-    array_after_genetic = genetic.genetic(array_of_processors, 30)  #Drugi parametr to ilo sekund.
+    array_after_genetic = genetic.genetic(array_of_processors, 3, optimumResult)  #Drugi parametr to ilo sekund.
     for i in range(processorsNumber):
         sum_array.append(sum(array_after_genetic[i]))
     print( "wynik po genetycznym")
@@ -62,6 +68,6 @@ if __name__ == "__main__":
 
     #DO usuniecia
 
-    for k in array_after_genetic:
-        print (k, sum(k))
+    #for k in array_after_genetic:
+    #    print (k, sum(k))
 

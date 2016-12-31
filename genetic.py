@@ -1,6 +1,6 @@
 import time
 
-def genetic(array_of_processors, end_time):
+def genetic(array_of_processors, end_time, optimumResult):
     length = len(array_of_processors)
     start_time = time.clock()
 
@@ -9,6 +9,8 @@ def genetic(array_of_processors, end_time):
         for index in range(0, length-1):
             #Sortujemy procesory po sumie czasow.
             array_of_processors = sorted(array_of_processors, key=sum)
+
+
 
             mniejszy = array_of_processors[index]
             wiekszy = array_of_processors[length-1]
@@ -22,6 +24,11 @@ def genetic(array_of_processors, end_time):
                 break
 
         #Wyj z funkcji jli przekroczono limit czasu
+
+        for i in range (len(array_of_processors)):
+            if (sum(array_of_processors[i]) == optimumResult):
+                break
+
         if time.clock() - start_time > end_time:
             print(time.clock() - start_time)
             return array_of_processors
