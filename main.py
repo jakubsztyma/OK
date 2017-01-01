@@ -84,7 +84,7 @@ if __name__ == "__main__":
         print(sorted(array_after_genetic[i], reverse=True), sum(array_after_genetic[i]))
 
 >>>>>>> cd61ee90b019bf5b38aef51a6b47dc9906318a6d
-
+s zostal
     #for k in array_after_genetic:
     #    print (k, sum(k))
 
